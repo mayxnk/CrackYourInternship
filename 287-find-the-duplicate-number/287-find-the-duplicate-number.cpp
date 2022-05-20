@@ -16,7 +16,9 @@ public:
         //     }
         // }
         // return ans;
-        unordered_map<int,int> freq;
+        
+        //O(n) approach,space - O(n)
+        /*unordered_map<int,int> freq;
         int ans;
         for(int i = 0;i<nums.size();i++)
             freq[nums[i]]++;
@@ -29,5 +31,20 @@ public:
             }
         }
         return ans;
+        */
+        //Constant space and O(n) time method
+        int slow = nums[0],fast = nums[0];
+        do
+        {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }while(slow!=fast);
+        fast = nums[0];
+        while(slow!=fast)
+        {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
     }
 };
