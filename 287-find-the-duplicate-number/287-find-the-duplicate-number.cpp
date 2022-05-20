@@ -1,14 +1,28 @@
 #include<algorithm>
+#include<unordered_map>
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) 
     {
-        // O(nlogn) solution
-        sort(nums.begin(),nums.end()); //Sorting the given array
-        int ans = 0;
-        for(int i = 0;i<nums.size()-1;i++)
+        // // O(nlogn) solution
+        // sort(nums.begin(),nums.end()); //Sorting the given array
+        // int ans = 0;
+        // for(int i = 0;i<nums.size()-1;i++)
+        // {
+        //     if(nums[i] == nums[i+1]) //Now,checking which element is repeated in this order
+        //     {
+        //         ans = nums[i];
+        //         break;
+        //     }
+        // }
+        // return ans;
+        unordered_map<int,int> freq;
+        int ans;
+        for(int i = 0;i<nums.size();i++)
+            freq[nums[i]]++;
+        for(int i = 0;i<nums.size();i++)
         {
-            if(nums[i] == nums[i+1]) //Now,checking which element is repeated in this order
+            if(freq[nums[i]] >= 2)
             {
                 ans = nums[i];
                 break;
@@ -16,5 +30,4 @@ public:
         }
         return ans;
     }
-   
 };
