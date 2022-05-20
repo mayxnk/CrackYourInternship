@@ -1,3 +1,4 @@
+#include<climits>
 class Solution {
 public:
     void sortColors(vector<int>& nums) 
@@ -31,8 +32,8 @@ public:
         delete []temp;
        */
         
-       /**** Optimal Approach */
-        int z = 0,one = 0,two = 0,i=0;
+       /****More Optimised Approach - O(2*n) */
+       /* int z = 0,one = 0,two = 0,i=0;
         int n = nums.size();
         for(int i = 0;i<n;i++)
         {
@@ -54,6 +55,25 @@ public:
                 nums[i++] = 1;
             else
                 nums[i++] = 2;
+        }
+        */
+        /*** Optimal Solution - O(n) time,O(1) space */
+        int n = nums.size();
+        int low = 0,mid = 0,high = n-1;
+        while(mid<=high)
+        {
+            if(nums[mid] == 0)
+            {
+                swap(nums[mid],nums[low]);
+                low++;mid++;
+            }
+            else if(nums[mid] == 1)
+                mid++;
+            else
+            {
+                swap(nums[mid],nums[high]);
+                high--;
+            }
         }
     }
 };
