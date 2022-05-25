@@ -2,10 +2,7 @@ class Solution {
 public:
     void moveZeroes(vector<int>& nums)
     {
-        int nzero = 0;
-        for(int i = 0;i<nums.size();i++)
-            if(nums[i] == 0)
-                nzero++;
+        //Brute Force Approach - O(2*n)
         int i = 0;
         for(int j = 0;j<nums.size();j++)
         {
@@ -15,9 +12,10 @@ public:
                 i++;
             }
         }
-        for(int j = nums.size()-nzero;j<nums.size();j++)
+        while(i<nums.size())
         {
-            nums[j] = 0;
+            nums[i] = 0;
+            i++;
         }
     }
 };
