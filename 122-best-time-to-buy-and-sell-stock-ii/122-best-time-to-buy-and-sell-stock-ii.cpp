@@ -11,8 +11,6 @@ public:
                 profit += (prices[i] - prices[i-1]);
         }
         return profit;
-
-        //Maxima and Minima Approach
         
     }
 };
