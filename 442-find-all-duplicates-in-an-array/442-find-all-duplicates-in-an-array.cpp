@@ -30,11 +30,11 @@ public:
         vector<int> ans;
         for(int i = 0;i<nums.size();i++)
         {
-            int index = abs(nums[i]) - 1;
+            int index = abs(nums[i]) - 1; //Calculating index by by element - 1
             if(nums[index] > 0)
-                nums[index] = -(nums[index]);
+                nums[index] = -(nums[index]);//Negating the element which is positive
             else
-                ans.push_back(abs(nums[i]));
+                ans.push_back(abs(nums[i])); //If found that element is negative,then add in                                         answer,because that means that element is again visited
         }
         return ans;
     }
