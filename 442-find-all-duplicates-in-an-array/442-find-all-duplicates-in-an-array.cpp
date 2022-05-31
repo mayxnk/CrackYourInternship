@@ -4,7 +4,7 @@ public:
     {
         //Brute foce approach - Time Complexity :O(nlogn),Space - O(1)
         vector<int> ans;
-        sort(nums.begin(),nums.end());
+        /*sort(nums.begin(),nums.end());
         for(int i = 0;i<nums.size()-1;i++)
         {
             if(nums[i] == nums[i+1])
@@ -13,6 +13,15 @@ public:
             }
         }
         return ans;
-        //Optimal Approach - Time Complexity - O(n)
+        */
+        //Better Approach - Time Complexity - O(n),Space -O(n)
+        unordered_map<int,int> freq;
+        for(int i = 0;i<nums.size();i++)
+        {
+            freq[nums[i]]++;
+            if(freq[nums[i]] == 2)
+                ans.push_back(nums[i]);
+        }
+        return ans;
     }
 };
