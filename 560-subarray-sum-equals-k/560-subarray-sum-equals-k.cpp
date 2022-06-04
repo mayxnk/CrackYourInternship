@@ -1,0 +1,42 @@
+class Solution {
+public:
+   
+    int subarraySum(vector<int>& nums, int k) 
+    {
+        //Brute Force Approach - Time:O(n^2) , Space:O(1)
+        /*int sum,count= 0,n = nums.size();
+        for(int i = 0;i<n;i++)
+        {
+            sum = 0;
+            for(int j = i;j<n;j++)
+            {
+                sum += nums[j];
+                if(sum == k)
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
+        */
+        int count = 0,sum = 0,n = nums.size();
+        vector<int> psum;
+        for(int i = 0;i<n;i++)
+        {
+            sum += nums[i];
+            psum.push_back(sum);
+        }
+        unordered_map<int,int> map;
+        for(int i = 0;i<n;i++)
+        {
+            if(psum[i] == k)
+                ++count;
+            if(map.find(psum[i]-k) != map.end())
+                count += map[psum[i]-k];
+            
+            map[psum[i]]++;
+        }
+        
+        return count;
+    }
+};
