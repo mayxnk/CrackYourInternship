@@ -29,9 +29,9 @@ public:
         unordered_map<int,int> map;
         for(int i = 0;i<n;i++)
         {
-            if(psum[i] == k)
+            if(psum[i] == k) //Check if prefix sum itself is equal to K or not
                 ++count;
-            if(map.find(psum[i]-k) != map.end())
+            if(map.find(psum[i]-k) != map.end()) //Check if psum[i]-k exist in map or not,if                                                  yes,that means there exist a subarray of sum=K
                 count += map[psum[i]-k];
             
             map[psum[i]]++;
