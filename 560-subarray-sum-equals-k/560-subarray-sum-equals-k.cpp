@@ -19,6 +19,7 @@ public:
         }
         return count;
         */
+        //Optimal Approach - Time:O(n),Space:(2*n) -> Prefix sum and map
         int count = 0,sum = 0,n = nums.size();
         vector<int> psum;
         for(int i = 0;i<n;i++)
