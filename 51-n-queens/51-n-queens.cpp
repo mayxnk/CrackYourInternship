@@ -1,41 +1,49 @@
 class Solution {
 public:
    vector<vector<string>> ret;
-    bool is_valid(vector<string> &board, int row, int col){
-        // check col
-        for(int i=row;i>=0;--i)
-            if(board[i][col] == 'Q') return false;
-        // check left diagonal
-        for(int i=row,j=col;i>=0&&j>=0;--i,--j)
-            if(board[i][j] == 'Q') return false;
-        //check right diagonal
-        for(int i=row,j=col;i>=0&&j<board.size();--i,++j)
-            if(board[i][j] == 'Q') return false;
+   bool isPossible(int n,int row,int col, vector<string>& ans)
+    {
+        //Upper column
+        for(int i = row-1;i>=0;i--)
+            if(ans[i][col] == 'Q')
+                return false;
+        //Upper right column
+        for(int i = row-1,j = col-1;i>=0 && j>=0;i--,j--)
+            if(ans[i][j]=='Q')
+               return false;
+        //Upper left column
+        for(int i = row-1,j = col+1;i>=0 && j<n;i--,j++)
+            if(ans[i][j] == 'Q')
+                return false;
+        
         return true;
     }
-    void dfs(vector<string> &board, int row){
-        // exit condition
-        if(row == board.size()){
-            ret.push_back(board);
+    void nQueenHelper(int n,int i, vector<string>& ans)
+    {
+        if(i == n)
+        {
+            // for(int i = 0;i<n;i++)
+            // {
+            //     vector<string> t;
+            //     for(int j = 0;j<)
+            // }
+            ret.push_back(ans);
             return;
         }
-        // iterate every possible position
-        for(int i=0;i<board.size();++i){
-            if(is_valid(board,row,i)){
-                // make decision
-                board[row][i] = 'Q';
-                // next iteration
-                dfs(board,row+1);
-                // back-tracking
-                board[row][i] = '.';
+        for(int j = 0;j<n;j++)
+        {
+            if(isPossible(n,i,j,ans))
+            {
+                ans[i][j] = 'Q';
+                nQueenHelper(n,i+1,ans);
+                ans[i][j] = '.';
             }
         }
     }
-    vector<vector<string>> solveNQueens(int n) {
-		// return empty if n <= 0
-        if(n <= 0) return {{}};
-        vector<string> board(n,string(n,'.'));
-        dfs(board,0);
+    vector<vector<string>> solveNQueens(int n) 
+    {
+        vector<string> ans(n,string(n,'.'));
+        nQueenHelper(n,0,ans);
         return ret;
     }
 };
