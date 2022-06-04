@@ -21,23 +21,34 @@ public:
         */
         //Optimal Approach - Time:O(n),Space:(2*n) -> Prefix sum and map
         int count = 0,sum = 0,n = nums.size();
-        vector<int> psum;
-        for(int i = 0;i<n;i++)
-        {
-            sum += nums[i];
-            psum.push_back(sum);
-        }
-        unordered_map<int,int> map;
-        for(int i = 0;i<n;i++)
-        {
-            if(psum[i] == k) //Check if prefix sum itself is equal to K or not
-                ++count;
-            if(map.find(psum[i]-k) != map.end()) //Check if psum[i]-k exist in map or not,if                                                  yes,that means there exist a subarray of sum=K
-                count += map[psum[i]-k];
+//         vector<int> psum;
+//         for(int i = 0;i<n;i++)
+//         {
+//             sum += nums[i];
+//             psum.push_back(sum);
+//         }
+//         unordered_map<int,int> map;
+//         for(int i = 0;i<n;i++)
+//         {
+//             if(psum[i] == k) //Check if prefix sum itself is equal to K or not
+//                 ++count;
+//             if(map.find(psum[i]-k) != map.end()) //Check if psum[i]-k exist in map or not,if                                                  yes,that means there exist a subarray of sum=K
+//                 count += map[psum[i]-k];
             
-            map[psum[i]]++;
-        }
+//             map[psum[i]]++;
+//         }
         
+//         return count;
+        //Space and time - O(n)
+        unordered_map<int,int> map;
+        int ls = 0;
+        map[0] = 1;
+        for(int i = 0;i<nums.size();i++)
+        {
+            ls += nums[i];
+            count += map[ls-k];
+            map[ls]++;
+        }
         return count;
     }
 };
