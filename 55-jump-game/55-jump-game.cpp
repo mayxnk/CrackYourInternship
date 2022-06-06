@@ -49,10 +49,20 @@ public:
         //return helper(nums,0);
         
         //Memoization
-        int *mark = new int[n+1];
-        for(int i = 0;i<=n;i++)
-            mark[i] = -1;
+        // int *mark = new int[n+1];
+        // for(int i = 0;i<=n;i++)
+        //     mark[i] = -1;
         
-        return helper(nums,0,mark);
+        //return helper(nums,0,mark);
+        //Linear
+        int reach = 0;
+        for(int i = 0;i<n;i++)
+        {
+            if(i > reach)
+                return false;
+            reach = max(reach,i+nums[i]);
+        }
+        return true;
+
     }
 };
