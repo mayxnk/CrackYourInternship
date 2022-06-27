@@ -38,6 +38,7 @@ public:
         {
             if(checkvalid(str))
                 ans.push_back(str);
+            str.clear();
             return;
         }
         helper(n,str + '(',ans);
